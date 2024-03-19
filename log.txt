@@ -1,0 +1,3 @@
+
+Date: 1710844440678 ipAddress:::1 requestMethod: GET path: /api/products
+Date: 1710844464340 ipAddress:::1 requestMethod: GET path: /api/products/1

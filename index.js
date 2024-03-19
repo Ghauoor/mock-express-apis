@@ -1,9 +1,44 @@
 const express = require("express");
 const Joi = require("joi"); // return a class
+const helmet = require("helmet");
+const morgan = require("morgan");
+const fs = require("fs");
+const { log, auth } = require("./middlewareIndex");
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); // parse the body of req
+app.use(express.urlencoded({ extended: true })); // parse the incoming req with url encoded payloads --> key=value&key=value--> req.body--> json
+
+console.log(`NODE_ENV ${process.env.NODE_ENV}`); // undefined
+console.log(`app: ${app.get("env")}`); // by default developement
+
+app.use(express.static("public")); // serves the static files like css or text files
+
+app.use((req, res, next) => {
+  fs.appendFile(
+    "log.txt",
+    `\nDate: ${Date.now()} ipAddress:${req.ip} requestMethod: ${
+      req.method
+    } path: ${req.path}\n`,
+    (err) => {
+      if (err) {
+        console.error("Error writing to log file", err);
+      }
+      next();
+    }
+  );
+});
+
+app.use(helmet());
+
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  console.log("Morgan enabled");
+}
+
+app.use(log);
+app.use(auth);
 
 const products = [
   { id: 1, name: "Apple" },
