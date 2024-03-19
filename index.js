@@ -2,10 +2,22 @@ const express = require("express");
 const Joi = require("joi"); // return a class
 const helmet = require("helmet");
 const morgan = require("morgan");
+const config = require("config");
 const fs = require("fs");
 const { log, auth } = require("./middlewareIndex");
 
+console.log(process.env.app_password);
 const app = express();
+
+// Configration
+console.log("Application name: " + config.get("name"));
+console.log("Mail Server: " + config.get("mail.host"));
+console.log("Mail Password: " + config.get("mail.password"));
+
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  console.log("Morgan enabled");
+}
 
 app.use(express.json()); // parse the body of req
 app.use(express.urlencoded({ extended: true })); // parse the incoming req with url encoded payloads --> key=value&key=value--> req.body--> json
@@ -31,11 +43,6 @@ app.use((req, res, next) => {
 });
 
 app.use(helmet());
-
-if (app.get("env") === "development") {
-  app.use(morgan("tiny"));
-  console.log("Morgan enabled");
-}
 
 app.use(log);
 app.use(auth);
