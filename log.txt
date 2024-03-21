@@ -1,3 +1,17 @@
 
 Date: 1710844440678 ipAddress:::1 requestMethod: GET path: /api/products
 Date: 1710844464340 ipAddress:::1 requestMethod: GET path: /api/products/1
+
+Date: 1710947048006 ipAddress:::1 requestMethod: GET path: /api/products
+
+Date: 1710947049330 ipAddress:::1 requestMethod: GET path: /
+
+Date: 1710947050098 ipAddress:::1 requestMethod: GET path: /favicon.ico
+
+Date: 1711015716566 ipAddress:::1 requestMethod: GET path: /api/products
+
+Date: 1711015719547 ipAddress:::1 requestMethod: GET path: /api/products/1
+
+Date: 1711015730706 ipAddress:::1 requestMethod: GET path: /api/products/10
+
+Date: 1711015829871 ipAddress:::1 requestMethod: GET path: /api/products
